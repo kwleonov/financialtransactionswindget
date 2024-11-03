@@ -26,4 +26,8 @@ def get_date(date_time: str) -> str:
     """Get date and time in format '2024-03-11T02:26:18.671407'
     and return date in format 'DD.MM.YYYY' ('11.03.2004')"""
 
-    pass
+    split_date = date_time[:10].split("-")
+    year = split_date[0]
+    month = split_date[1]
+    day = split_date[2]
+    return f"{day}.{month}.{year}"

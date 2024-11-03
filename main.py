@@ -1,4 +1,4 @@
-from src.widget import mask_account_card
+from src.widget import get_date, mask_account_card
 
 
 def main() -> None:
@@ -16,6 +16,10 @@ def main() -> None:
     for data_str in test_data:
         mask_str = mask_account_card(data_str)
         print(f"Input: {data_str}\nOutput: {mask_str}")
+
+    date_time = "2024-03-11T02:26:18.671407"
+    my_date = get_date(date_time)
+    print(f"Input: {date_time}\nOutput: {my_date}")
 
 
 if __name__ == "__main__":
