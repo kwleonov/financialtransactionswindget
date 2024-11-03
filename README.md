@@ -3,4 +3,4 @@ Financial Transactions Widget
 
 Modules:
     - src/masks
-
+    - src/widget
