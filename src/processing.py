@@ -17,4 +17,7 @@ def filter_by_state(processes: list, state: str = "EXECUTED") -> list:
 def sort_by_date(processes: list, is_descending: bool = True) -> list:
     """gets a list of dictionaries and an optional parameter specifying the sort order (by default, descending).
     The function should return a new list sorted by date."""
-    pass
+
+    sorted_processes = sorted(processes, key=lambda k: k["date"], reverse=is_descending)
+
+    return sorted_processes
