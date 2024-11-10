@@ -12,7 +12,7 @@ Modules:
   - get_date(date_time: str) -> str \- *gets date and time in format '2024-03-11T02:26:18.671407'
     and return date in format 'DD.MM.YYYY' ('11.03.2004')*
 - **src/processing**
-  - filter_by_state(processes: list, state: str="EXECUTED") -> list - *gets a list of dictionaries and optionally a value for the key the 'state' (by default 'EXECUTED').  
+  - filter_by_state(processes: list[dict[str, int | str]], state: str="EXECUTED") -> list[dict[str, int | str]] - *gets a list of dictionaries and optionally a value for the key the 'state' (by default 'EXECUTED').  
   The function returns a new list of dictionaries containing only those dictionaries whose 'state' key matches the specified value.*
-  - sort_by_date(processes: list, is_descending: bool=True) -> list - *gets a list of dictionaries and an optional parameter specifying the sort order (by default, descending).  
+  - sort_by_date(processes: list[dict[str, int | str]], is_descending: bool=True) -> list[dict[str, int | str]] - *gets a list of dictionaries and an optional parameter specifying the sort order (by default, descending).  
   The function should return a new list sorted by date.*
