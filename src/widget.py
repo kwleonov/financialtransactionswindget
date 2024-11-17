@@ -34,27 +34,31 @@ def get_date(date_time: str) -> str:
     if len(date_time) < 10:
         return incorrect_date
 
-    split_date = date_time[:10].split("-")
+    split_date_time = date_time.split("T")
+    if len(split_date_time) != 2:
+        return incorrect_date
+
+    split_date = split_date_time[0].split("-")
     if len(split_date) < 3:
         return incorrect_date
 
     year = split_date[0]
-    if len(year) < 4 and not year.isdigit():
+    if len(year) < 4 or not year.isdigit():
         return incorrect_date
 
     month = split_date[1]
-    if len(month) > 2 and not month.isdigit():
+    if len(month) > 2 or not month.isdigit():
         return incorrect_date
     if int(month) > 12:
         return incorrect_date
 
     day = split_date[2]
-    if len(day) > 2 and not day.isdigit():
+    if len(day) > 2 or not day.isdigit():
         return incorrect_date
     if int(day) > 31:
         return incorrect_date
     if int(month) in [4, 6, 9, 11] and int(day) > 30:
-        return  incorrect_date
+        return incorrect_date
     if int(month) == 2:
         is_leap_year = False
         if int(year) % 4 == 0:
@@ -66,6 +70,6 @@ def get_date(date_time: str) -> str:
         if is_leap_year and int(day) > 29:
             return incorrect_date
         if not is_leap_year and int(day) > 28:
-            return  incorrect_date
+            return incorrect_date
 
     return f"{day}.{month}.{year}"

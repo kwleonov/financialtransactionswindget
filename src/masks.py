@@ -30,7 +30,7 @@ def get_mask_card_number(card_number: str) -> str:
             first_digits_group.append(first_digits[:first_group_length])
             start_index += first_group_length
         for i in range(start_index, len(first_digits), 4):
-            first_digits_group.append(first_digits[i : i + 4])
+            first_digits_group.append(first_digits[i: i + 4])
     else:
         first_digits_group = [first_digits]
 

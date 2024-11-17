@@ -42,3 +42,5 @@ Modules:
   - test_get_incorrect_date() - *Testing get incorrect date.*
 - **teats/test_processing**
   - test_filter_by_state() - *Testing the filtering of a list of dictionaries by a given state status.*
+  - test_sort_by_date() - *Testing the sorting of the dictionary list by date in descending and ascending order.*
+  - test_sort_by_incorrect_data - *Testing sort by incorrect date.*
