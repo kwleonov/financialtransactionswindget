@@ -19,8 +19,7 @@ def get_mask_card_number(card_number: str) -> str:
     if not card_number.isdigit():
         return invalid_format
 
-
-# Divide firts digits into groups of 4 digits
+    # Divide firts digits into groups of 4 digits
 
     first_digits = card_number[:-12]
     first_digits_group = list()
@@ -31,7 +30,7 @@ def get_mask_card_number(card_number: str) -> str:
             first_digits_group.append(first_digits[:first_group_length])
             start_index += first_group_length
         for i in range(start_index, len(first_digits), 4):
-            first_digits_group.append(first_digits[i: i+4])
+            first_digits_group.append(first_digits[i : i + 4])
     else:
         first_digits_group = [first_digits]
 
@@ -46,6 +45,10 @@ def get_mask_account(account_number: str) -> str:
     """Function get_mask_account(account_number: str) -> str gets account
     number XXXXXXXXXXXXXXXXXXXX (20 digits) and return mask **XXXX,
     where XXXX are 4 last digits."""
+
+    account_number = account_number.replace(" ", "")
+    if not account_number.isdigit():
+        return "Invalid account number format"
 
     last_4_digits = account_number[-4:]
     return f"**{last_4_digits}"

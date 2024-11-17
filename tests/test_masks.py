@@ -60,3 +60,18 @@ def test_get_mask_account(account_number: str, mask: str) -> None:
 
     out = get_mask_account(account_number)
     assert out == mask
+
+
+@pytest.mark.parametrize(
+    "account_number, mask",
+    [
+        ("6468 6473 6788 9477 9589", "**9589"),
+        ("3538-3033-4744-4789-5560", "Invalid account number format"),
+        ("7365410843ABCD0135874305", "Invalid account number format"),
+    ],
+)
+def test_get_mask_different_account_format(account_number: str, mask: str) -> None:
+    """checking the operation of the function on various input formats of account numbers."""
+
+    out = get_mask_account(account_number)
+    assert out == mask
