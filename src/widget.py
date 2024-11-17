@@ -10,6 +10,9 @@ def mask_account_card(account_or_card_number: str) -> str:
         Счет 73654108430135874305      -> Счет **4305"""
 
     split_number = account_or_card_number.split()
+    if len(split_number) < 2:
+        return "Incorrect data"
+
     type_number = " ".join(split_number[:-1])
     number = split_number[-1]
     mask_number = ""
