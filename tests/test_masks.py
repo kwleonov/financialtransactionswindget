@@ -38,3 +38,10 @@ def test_get_mask_non_standard_card_number(card_number: str, mask: str) -> None:
 
     out = get_mask_card_number(card_number)
     assert out == mask
+
+
+def test_get_mask_empty_card_number() -> None:
+    """checking that the function correctly processes input lines where the card number is missing."""
+
+    out = get_mask_card_number("")
+    assert out == "Get empty card number"

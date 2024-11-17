@@ -7,7 +7,11 @@ def get_mask_card_number(card_number: str) -> str:
     where X is digit."""
 
     invalid_format = "Invalid card number format"
+    empty_card_number = "Get empty card number"
     card_number = card_number.replace(" ", "")
+
+    if len(card_number) == 0:
+        return empty_card_number
 
     if len(card_number) < 13:
         return invalid_format
