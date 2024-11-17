@@ -38,3 +38,4 @@ Modules:
   masking, depending on the type of input data (card or account).*
   - test_mask_incorrect_account_card() - *Testing the function for processing incorrect input data and
   checking it\'s error tolerance.*
+  - test_get_date() - *Testing the correctness of the date conversion.*

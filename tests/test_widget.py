@@ -1,6 +1,6 @@
 import pytest
 
-from src.widget import mask_account_card
+from src.widget import get_date, mask_account_card
 
 
 @pytest.mark.parametrize(
@@ -41,3 +41,19 @@ def test_mask_incorrect_account_card(account_card: str, mask: str) -> None:
 
     out = mask_account_card(account_card)
     assert out == mask
+
+
+@pytest.mark.parametrize(
+    "date_time, date",
+    [
+        ("2019-07-03T18:35:29.512364", "03.07.2019"),
+        ("2018-06-30T02:08:58.425572", "30.06.2018"),
+        ("2018-09-12T21:27:25.241689", "12.09.2018"),
+        ("2018-10-14T08:21:33.419441", "14.10.2018"),
+    ],
+)
+def test_get_data(date_time: str, date: str) -> None:
+    """Testing the correctness of the date conversion"""
+
+    out = get_date(date_time)
+    assert out == date
