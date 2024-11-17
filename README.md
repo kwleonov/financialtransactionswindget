@@ -20,3 +20,6 @@ Modules:
   - test_get_mask_card_number() - *testing the correctness of masking a card number.*
   - test_get_mask_non_standard_card_number() - *checking the operation of the function on various input formats of card numbers, including boundary cases and non-standard number lengths.*
   - test_get_mask_empty_card_number() - *checking that the function correctly processes input lines where the card number is missing.*
+  - test_get_mask_account() - *testing the correctness of masking an account number.*
+  - test_get_mask_different_account_format() - *checking the operation of the function on various input formats of account numbers.*
+  - test_get_mask_small_account_length() - *checking that the function correctly processes input data where the account number is less than the expected length.*

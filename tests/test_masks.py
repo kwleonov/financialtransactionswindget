@@ -1,6 +1,6 @@
 import pytest
 
-from src.masks import get_mask_card_number
+from src.masks import get_mask_account, get_mask_card_number
 
 
 @pytest.mark.parametrize(
@@ -45,3 +45,18 @@ def test_get_mask_empty_card_number() -> None:
 
     out = get_mask_card_number("")
     assert out == "Get empty card number"
+
+
+@pytest.mark.parametrize(
+    "account_number, mask",
+    [
+        ("64686473678894779589", "**9589"),
+        ("35383033474447895560", "**5560"),
+        ("73654108430135874305", "**4305"),
+    ],
+)
+def test_get_mask_account(account_number: str, mask: str) -> None:
+    """testing the correctness of masking an account number."""
+
+    out = get_mask_account(account_number)
+    assert out == mask
