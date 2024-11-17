@@ -16,3 +16,7 @@ Modules:
   The function returns a new list of dictionaries containing only those dictionaries whose 'state' key matches the specified value.*
   - sort_by_date(processes: list[dict[str, int | str]], is_descending: bool=True) -> list[dict[str, int | str]] - *gets a list of dictionaries and an optional parameter specifying the sort order (by default, descending).  
   The function should return a new list sorted by date.*
+- **tests/test_masks**
+  - test_get_mask_card_number() - *testing the correctness of masking a card number.*
+  - test_get_mask_non_standard_card_number() - *checking the operation of the function on various input formats of card numbers, including boundary cases and non-standard number lengths.*
+  - test_get_mask_empty_card_number() - *checking that the function correctly processes input lines where the card number is missing.*
