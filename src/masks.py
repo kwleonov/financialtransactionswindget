@@ -47,6 +47,11 @@ def get_mask_account(account_number: str) -> str:
     where XXXX are 4 last digits."""
 
     account_number = account_number.replace(" ", "")
+    account_number_length = len(account_number)
+
+    if account_number_length < 20:
+        return "Invalid account number length"
+
     if not account_number.isdigit():
         return "Invalid account number format"
 

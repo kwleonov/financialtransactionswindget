@@ -75,3 +75,19 @@ def test_get_mask_different_account_format(account_number: str, mask: str) -> No
 
     out = get_mask_account(account_number)
     assert out == mask
+
+
+@pytest.mark.parametrize(
+    "account_number",
+    [
+        ("6468 6473 6788 9477"),
+        ("3033474447895560"),
+        (""),
+    ],
+)
+def test_get_mask_small_account_length(account_number: str) -> None:
+    """checking that the function correctly processes input data
+    where the account number is less than the expected length."""
+
+    out = get_mask_account(account_number)
+    assert out == "Invalid account number length"
