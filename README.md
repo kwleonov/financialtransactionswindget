@@ -39,3 +39,4 @@ Modules:
   - test_mask_incorrect_account_card() - *Testing the function for processing incorrect input data and
   checking it\'s error tolerance.*
   - test_get_date() - *Testing the correctness of the date conversion.*
+  - test_get_incorrect_date() - *Testing get incorrect date.*

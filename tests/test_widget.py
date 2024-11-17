@@ -52,8 +52,27 @@ def test_mask_incorrect_account_card(account_card: str, mask: str) -> None:
         ("2018-10-14T08:21:33.419441", "14.10.2018"),
     ],
 )
-def test_get_data(date_time: str, date: str) -> None:
-    """Testing the correctness of the date conversion"""
+def test_get_date(date_time: str, date: str) -> None:
+    """Testing the correctness of the date conversion."""
 
     out = get_date(date_time)
     assert out == date
+
+
+@pytest.mark.parametrize(
+    "date_time",
+    [
+        (""),
+        ("2018-6-30"),
+        ("18-09-12T21:27:25.241689"),
+        ("2018-14-12T08:21:33.419441"),
+        ("2018-11-31T08:21:33.419441"),
+        ("2018-06-31T08:21:33.419441"),
+        ("2100-02-29T08:21:33.419441"),
+    ],
+)
+def test_get_incorrect_date(date_time: str) -> None:
+    """Testing get incorrect date."""
+
+    out = get_date(date_time)
+    assert out == "Incorrect date"
