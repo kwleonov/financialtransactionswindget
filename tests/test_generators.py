@@ -98,3 +98,20 @@ def test_card_number_generator(start_number, stop_number, list_numbers):
     for number in list_numbers:
         card_number = next(get_card_number)
         assert number == card_number
+
+
+@pytest.mark.parametrize("card_number", [
+    1234_5678,
+    1234_5678_8765_4321,
+])
+def test_card_number_format(card_number):
+    """testing correcting card number format."""
+
+    get_card_number = card_number_generator(card_number, card_number)
+    str_card_number = next(get_card_number)
+    groups = str_card_number.split(' ')
+
+    assert len(groups) == 4
+    for group in groups:
+        assert len(group) == 4
+        assert group.isdigit()

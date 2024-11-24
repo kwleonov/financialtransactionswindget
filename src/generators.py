@@ -24,6 +24,15 @@ def card_number_generator(start_number, stop_number):
     The generator can generate card numbers in the specified range from 0000 0000 0000 0001 to 9999 9999 9999 9999.
     The generator must take initial and final values to generate a range of numbers."""
 
+    finish_number = 9999_9999_9999_9999
+
+    if start_number > finish_number:
+        return
+    if start_number < 1:
+        start_number = 1
+    if stop_number > finish_number:
+        stop_number = finish_number
+
     for number in range(start_number, stop_number + 1):
         str_number = str(number)
         str_number = str_number.rjust(16, "0")

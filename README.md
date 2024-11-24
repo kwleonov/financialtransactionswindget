@@ -63,3 +63,5 @@ Modules:
   - test_by_empty_transaction_descriptions() - *testing getting transaction's description with 
   the empty transactions list.*
   - test_card_number_generator() - *testing getting card numbers.*
+  - test_card_number_format() - *testing correcting card number format.*
+  - test_bad_card_number_range() - *testing for an incorrect range of card numbers.*
