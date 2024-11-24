@@ -56,5 +56,8 @@ Modules:
   - test_sort_by_incorrect_data - *Testing sort by incorrect date.*
 - **tests/test_generators**
   - test_filter_by_currency() - *testing filtering transactions by currency.*
+  - test_filter_by_KGS_currency() - *testing filtering by 'Kazakhstan some' have to return an empty list.*
+  - test_filter_by_empty_currency_transactions() - *testing filtering by an empty transactions list or 
+  an empty currency.*
   - test_transaction_descriptions() - *testing getting transaction's description.*
   - test_card_number_generator() - *testing getting card numbers.*

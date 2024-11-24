@@ -13,6 +13,41 @@ def test_filter_by_currency(transactions):
         assert transaction["operationAmount"]["currency"]["code"] == "USD"
 
 
+def test_filter_by_KGS_currency(transactions):
+    """testing filtering by 'Kazakhstan some' have to return an empty list."""
+
+    transactions_by_KGS = filter_by_currency(transactions, "KGS")
+    list_transactions = list(transactions_by_KGS)
+    assert len(list_transactions) == 0
+
+
+@pytest.mark.parametrize("transaction_list, currency_code", [
+    ([
+        {
+            "id": 939719570,
+            "state": "EXECUTED",
+            "date": "2018-06-30T02:08:58.425572",
+            "operationAmount": {
+                "amount": "9824.07",
+                "currency": {
+                    "name": "USD",
+                    "code": "USD"
+                }
+            },
+            "description": "Перевод организации",
+            "from": "Счет 75106830613657916952",
+            "to": "Счет 11776614605963066702"
+        },
+     ], "RUB"),
+    ([], "")
+])
+def test_filter_by_empty_currency_transactions(transaction_list, currency_code):
+    """testing filtering by an empty transactions list or an empty currency."""
+
+    transactions = list(filter_by_currency(transaction_list, currency_code))
+    assert len(transactions) == 0
+
+
 def test_transaction_descriptions(transactions):
     """testing getting transaction's description."""
 
