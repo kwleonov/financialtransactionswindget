@@ -28,6 +28,7 @@ def incorrect_processes() -> list[dict[str, int | str]]:
 
     return test_data
 
+
 @pytest.fixture
 def transactions() -> list[dict[str, int | str]]:
     """fixture for the test_generators module"""
