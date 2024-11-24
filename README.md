@@ -60,4 +60,6 @@ Modules:
   - test_filter_by_empty_currency_transactions() - *testing filtering by an empty transactions list or 
   an empty currency.*
   - test_transaction_descriptions() - *testing getting transaction's description.*
+  - test_by_empty_transaction_descriptions() - *testing getting transaction's description with 
+  the empty transactions list.*
   - test_card_number_generator() - *testing getting card numbers.*

@@ -66,6 +66,14 @@ def test_transaction_descriptions(transactions):
         assert description == answer
 
 
+def test_by_empty_transaction_descriptions():
+    """esting getting transaction's description with the empty transactions list."""
+
+    get_transactions_description = transaction_descriptions([])
+    descriptions = list(get_transactions_description)
+    assert len(descriptions) == 0
+
+
 @pytest.mark.parametrize(
     "start_number, stop_number, list_numbers",
     [
