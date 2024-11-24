@@ -30,10 +30,10 @@ def incorrect_processes() -> list[dict[str, int | str]]:
 
 
 @pytest.fixture
-def transactions() -> list[dict[str, int | str]]:
+def transactions():
     """fixture for the test_generators module"""
 
-    transactions_data: list[dict[str, int | str]] = [
+    transactions_data = [
         {
             "id": 939719570,
             "state": "EXECUTED",
