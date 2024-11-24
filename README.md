@@ -33,6 +33,10 @@ Modules:
   account numbers.*
   - test_get_mask_small_account_length() - *checking that the function correctly processes input data where
   the account number is less than the expected length.*
+- **src/generators**
+  - filter_by_currency(transactions, currency_code) - *The function get a list of dictionaries representing 
+  transactions as input. The function should return an iterator that alternately issues transactions where 
+  the transaction currency corresponds to the specified one (for example, USD).*
 - **tests/test_widget**
   - test_mask_account_card() - *Tests to verify that the function correctly recognizes and applies the desired type of
   masking, depending on the type of input data (card or account).*
@@ -44,3 +48,5 @@ Modules:
   - test_filter_by_state() - *Testing the filtering of a list of dictionaries by a given state status.*
   - test_sort_by_date() - *Testing the sorting of the dictionary list by date in descending and ascending order.*
   - test_sort_by_incorrect_data - *Testing sort by incorrect date.*
+- **tests/test_generators**
+  - test_filter_by_currency() - *testing filtering transactions by currency.*
