@@ -115,3 +115,22 @@ def test_card_number_format(card_number):
     for group in groups:
         assert len(group) == 4
         assert group.isdigit()
+
+
+@pytest.mark.parametrize("start_number, stop_number, card_number", [
+    (-1, 1, "0000 0000 0000 0001"),
+    (9999_9999_9999_9999, 1_2345_6789_9999_9999, "9999 9999 9999 9999"),
+    (-1, 0, ""),
+    (10, 9, ""),
+])
+def test_bad_card_number_range(start_number, stop_number, card_number):
+    """testing for an incorrect range of card numbers."""
+
+    card_numbers = list(card_number_generator(start_number, stop_number))
+
+    assert (len(card_numbers) == 0 or len(card_numbers) == 1)
+    if len(card_numbers) > 0:
+        str_card_number = card_numbers[0]
+        assert str_card_number == card_number
+        return
+    assert card_number == ""
