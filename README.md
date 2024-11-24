@@ -37,6 +37,8 @@ Modules:
   - filter_by_currency(transactions, currency_code) - *The function get a list of dictionaries representing 
   transactions as input. The function should return an iterator that alternately issues transactions where 
   the transaction currency corresponds to the specified one (for example, USD).*
+  - transaction_descriptions(transactions): - *The generator, which takes a list of dictionaries with transactions and 
+  returns a description of each operation in turn.*
 - **tests/test_widget**
   - test_mask_account_card() - *Tests to verify that the function correctly recognizes and applies the desired type of
   masking, depending on the type of input data (card or account).*
@@ -50,3 +52,4 @@ Modules:
   - test_sort_by_incorrect_data - *Testing sort by incorrect date.*
 - **tests/test_generators**
   - test_filter_by_currency() - *testing filtering transactions by currency.*
+  - test_transaction_descriptions() - *testing getting transaction's description.*

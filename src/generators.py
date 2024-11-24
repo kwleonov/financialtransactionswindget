@@ -10,8 +10,12 @@ def filter_by_currency(transactions, currency_code):
     return transactions_by_code
 
 
-def transaction_descriptions():
-    pass
+def transaction_descriptions(transactions):
+    """The generator transaction_descriptions, which takes a list of dictionaries with transactions and
+    returns a description of each operation in turn."""
+
+    for transaction in transactions:
+        yield transaction["description"]
 
 
 def card_number_generator():
