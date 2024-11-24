@@ -39,6 +39,10 @@ Modules:
   the transaction currency corresponds to the specified one (for example, USD).*
   - transaction_descriptions(transactions): - *The generator, which takes a list of dictionaries with transactions and 
   returns a description of each operation in turn.*
+  - card_number_generator(start_number, stop_number) - The generator, which issues bank card numbers in the format 
+  XXXX XXXX XXXX XXXX, where X is the digit of the card number.  
+  The generator can generate card numbers in the specified range from 0000 0000 0000 0001 to 9999 9999 9999 9999.  
+  The generator must take initial and final values to generate a range of numbers.
 - **tests/test_widget**
   - test_mask_account_card() - *Tests to verify that the function correctly recognizes and applies the desired type of
   masking, depending on the type of input data (card or account).*
@@ -53,3 +57,4 @@ Modules:
 - **tests/test_generators**
   - test_filter_by_currency() - *testing filtering transactions by currency.*
   - test_transaction_descriptions() - *testing getting transaction's description.*
+  - test_card_number_generator() - *testing getting card numbers.*
