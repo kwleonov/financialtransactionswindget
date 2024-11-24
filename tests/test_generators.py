@@ -122,6 +122,7 @@ def test_card_number_format(card_number):
     (9999_9999_9999_9999, 1_2345_6789_9999_9999, "9999 9999 9999 9999"),
     (-1, 0, ""),
     (10, 9, ""),
+    (1_2345_6789_9999_0000, 1_2345_6789_9999_9999, ""),
 ])
 def test_bad_card_number_range(start_number, stop_number, card_number):
     """testing for an incorrect range of card numbers."""
