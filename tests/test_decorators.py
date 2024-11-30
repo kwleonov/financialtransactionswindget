@@ -4,7 +4,7 @@ from src.decorators import log
 
 
 def test_log(capsys):
-    """test log myfunc returned string."""
+    """the test of logging the execution of the wrapped function, the call of which ended without errors."""
 
     @log()
     def myfunc(s):
@@ -14,11 +14,12 @@ def test_log(capsys):
     captured = capsys.readouterr()
     result = "myfunc ok"
     answer = captured.out.rstrip()
+
     assert answer == result
 
 
 def test_log_error(capsys):
-    """test log myfunc with exception error."""
+    """the test for the log decorator when an error is called as a result of executing the wrapped function."""
 
     @log()
     def myfunc(a, b):
