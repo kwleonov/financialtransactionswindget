@@ -33,6 +33,16 @@ Modules:
   account numbers.*
   - test_get_mask_small_account_length() - *checking that the function correctly processes input data where
   the account number is less than the expected length.*
+- **src/generators**
+  - filter_by_currency(transactions, currency_code) - *The function get a list of dictionaries representing 
+  transactions as input. The function should return an iterator that alternately issues transactions where 
+  the transaction currency corresponds to the specified one (for example, USD).*
+  - transaction_descriptions(transactions): - *The generator, which takes a list of dictionaries with transactions and 
+  returns a description of each operation in turn.*
+  - card_number_generator(start_number, stop_number) - The generator, which issues bank card numbers in the format 
+  XXXX XXXX XXXX XXXX, where X is the digit of the card number.  
+  The generator can generate card numbers in the specified range from 0000 0000 0000 0001 to 9999 9999 9999 9999.  
+  The generator must take initial and final values to generate a range of numbers.
 - **tests/test_widget**
   - test_mask_account_card() - *Tests to verify that the function correctly recognizes and applies the desired type of
   masking, depending on the type of input data (card or account).*
@@ -44,3 +54,14 @@ Modules:
   - test_filter_by_state() - *Testing the filtering of a list of dictionaries by a given state status.*
   - test_sort_by_date() - *Testing the sorting of the dictionary list by date in descending and ascending order.*
   - test_sort_by_incorrect_data - *Testing sort by incorrect date.*
+- **tests/test_generators**
+  - test_filter_by_currency() - *testing filtering transactions by currency.*
+  - test_filter_by_KGS_currency() - *testing filtering by 'Kazakhstan some' have to return an empty list.*
+  - test_filter_by_empty_currency_transactions() - *testing filtering by an empty transactions list or 
+  an empty currency.*
+  - test_transaction_descriptions() - *testing getting transaction's description.*
+  - test_by_empty_transaction_descriptions() - *testing getting transaction's description with 
+  the empty transactions list.*
+  - test_card_number_generator() - *testing getting card numbers.*
+  - test_card_number_format() - *testing correcting card number format.*
+  - test_bad_card_number_range() - *testing for an incorrect range of card numbers.*
