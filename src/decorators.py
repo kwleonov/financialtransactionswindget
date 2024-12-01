@@ -1,6 +1,11 @@
 # The decorators module.
 
 def log(filename=""):
+    """The log decorator, which will automatically log the beginning and end of the function execution,
+    as well as its results or errors that have occurred. The decorator must accept an optional argument filename,
+    which determines where the logs will be written (to a file or to the console):
+    - If filename is set, logs are written to the specified file.
+    - If filename is not specified, the login is output to the console."""
     def logger(inner):
         def wrapper(*args, **kwargs):
             end_line = "\n"
