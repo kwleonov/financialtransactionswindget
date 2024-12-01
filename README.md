@@ -33,10 +33,11 @@ Modules:
   The generator can generate card numbers in the specified range from 0000 0000 0000 0001 to 9999 9999 9999 9999.  
   The generator must take initial and final values to generate a range of numbers.
 - **src/decorators**
-  - log(filename) - *a decorator for logging the execution of the wrapped function. Logging includes:*
-    - *The name of the function and the result of the successful operation.*
-    - *The name of the function, the type of error that occurred, and the input parameters if the execution of 
-    the function resulted in an error.*
+  - log(filename) - *The log decorator, which will automatically log the beginning and end of the function execution, 
+  as well as its results or errors that have occurred. The decorator must accept an optional argument filename, 
+  which determines where the logs will be written (to a file or to the console):*
+    - *If filename is set, logs are written to the specified file.*
+    - *If filename is not specified, the login is output to the console.*
 - **tests/test_masks**
   - test_get_mask_card_number() - *testing the correctness of masking a card number.*
   - test_get_mask_non_standard_card_number() - *checking the operation of the function on various input formats of
