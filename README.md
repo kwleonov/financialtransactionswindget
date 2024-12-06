@@ -22,6 +22,22 @@ Modules:
   - sort_by_date(processes: list[dict[str, int | str]], is_descending: bool=True) -> list[dict[str, int | str]] -
   *gets a list of dictionaries and an optional parameter specifying the sort order (by default, descending).  
   The function should return a new list sorted by date.*
+- **src/generators**
+  - filter_by_currency(transactions, currency_code) - *The function get a list of dictionaries representing 
+  transactions as input. The function should return an iterator that alternately issues transactions where 
+  the transaction currency corresponds to the specified one (for example, USD).*
+  - transaction_descriptions(transactions): - *The generator, which takes a list of dictionaries with transactions and 
+  returns a description of each operation in turn.*
+  - card_number_generator(start_number, stop_number) - The generator, which issues bank card numbers in the format 
+  XXXX XXXX XXXX XXXX, where X is the digit of the card number.  
+  The generator can generate card numbers in the specified range from 0000 0000 0000 0001 to 9999 9999 9999 9999.  
+  The generator must take initial and final values to generate a range of numbers.
+- **src/decorators**
+  - log(filename) - *The log decorator, which will automatically log the beginning and end of the function execution, 
+  as well as its results or errors that have occurred. The decorator must accept an optional argument filename, 
+  which determines where the logs will be written (to a file or to the console):*
+    - *If filename is set, logs are written to the specified file.*
+    - *If filename is not specified, the login is output to the console.*
 - **tests/test_masks**
   - test_get_mask_card_number() - *testing the correctness of masking a card number.*
   - test_get_mask_non_standard_card_number() - *checking the operation of the function on various input formats of
@@ -33,16 +49,6 @@ Modules:
   account numbers.*
   - test_get_mask_small_account_length() - *checking that the function correctly processes input data where
   the account number is less than the expected length.*
-- **src/generators**
-  - filter_by_currency(transactions, currency_code) - *The function get a list of dictionaries representing 
-  transactions as input. The function should return an iterator that alternately issues transactions where 
-  the transaction currency corresponds to the specified one (for example, USD).*
-  - transaction_descriptions(transactions): - *The generator, which takes a list of dictionaries with transactions and 
-  returns a description of each operation in turn.*
-  - card_number_generator(start_number, stop_number) - The generator, which issues bank card numbers in the format 
-  XXXX XXXX XXXX XXXX, where X is the digit of the card number.  
-  The generator can generate card numbers in the specified range from 0000 0000 0000 0001 to 9999 9999 9999 9999.  
-  The generator must take initial and final values to generate a range of numbers.
 - **tests/test_widget**
   - test_mask_account_card() - *Tests to verify that the function correctly recognizes and applies the desired type of
   masking, depending on the type of input data (card or account).*
@@ -65,3 +71,7 @@ Modules:
   - test_card_number_generator() - *testing getting card numbers.*
   - test_card_number_format() - *testing correcting card number format.*
   - test_bad_card_number_range() - *testing for an incorrect range of card numbers.*
+- **tests/test_decorators**
+  - test_log() - *the test of logging the execution of the wrapped function, the call of which ended without errors.*
+  - test_log_error() - *the test for the log decorator when an error is called as a result of executing 
+  the wrapped function.*
