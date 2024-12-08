@@ -1,6 +1,9 @@
 # the utils module.
+import datetime
 import json
 from json import JSONDecodeError
+
+from src.external_api import convert_amount
 
 
 def load_operations_json(filename: str) -> list[dict[str, any]]:
@@ -32,10 +35,10 @@ def get_transaction_amount(transaction_data: dict[str, any]) -> float:
     amount = transaction_data["operationAmount"]["amount"]
     currency = transaction_data["operationAmount"]["currency"]["code"]
 
-    amount_float = 0.0
     if currency != "RUB":
-        amount = convert_currency(amount, code)
-    else:
-        amount = float(amount)
+        date_str = transaction_data["date"]
+        date_time = datetime.datetime.fromisoformat(date_str)
+        date = date_time.strftime("%Y-%m-%d")
+        amount = convert_amount(amount, currency, date)
 
-    return amount_float
+    return amount
