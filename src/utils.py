@@ -12,15 +12,16 @@ def load_operations_json(filename: str) -> list[dict[str, any]]:
 
     transaction_data = []
 
-    with open(filename, "r") as f:
-        try:
+    try:
+        with open(filename, "r") as f:
             transaction_data = json.load(f)
-        except JSONDecodeError:
-            pass
-        except TypeError:
-            pass
-        except ValueError:
-            pass
+            if type(transaction_data) is not list:
+                return []
+
+    except JSONDecodeError as e:
+        print(f"JSON decode error: {e}")
+    except FileNotFoundError as e:
+        print(f"JSON decode error: {e}")
 
     return transaction_data
 
