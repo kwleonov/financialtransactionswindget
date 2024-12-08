@@ -30,7 +30,6 @@ def convert_amount(amount: float, code: str, date: str) -> float:
 
     api_result_key = os.getenv('API_RESULT')
     result_json = response.json()
-    print(result_json, type(result_json))
     result_amount: float = result_json[api_result_key]
 
     return result_amount

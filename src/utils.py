@@ -34,12 +34,13 @@ def get_transaction_amount(transaction_data: dict[str, any]) -> float:
     the external_api module."""
 
     amount = transaction_data["operationAmount"]["amount"]
+    amount_float = float(amount)
     currency = transaction_data["operationAmount"]["currency"]["code"]
 
     if currency != "RUB":
         date_str = transaction_data["date"]
         date_time = datetime.datetime.fromisoformat(date_str)
         date = date_time.strftime("%Y-%m-%d")
-        amount = convert_amount(amount, currency, date)
+        amount_float = convert_amount(amount, currency, date)
 
-    return amount
+    return amount_float
