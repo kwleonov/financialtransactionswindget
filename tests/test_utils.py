@@ -37,7 +37,7 @@ def test_load_not_exist_operations_json():
 
 @patch('builtins.open')
 def test_empty_load_operations_json(mock_file):
-    """testing loading incorrect json file."""
+    """testing loading empty json file."""
 
     json_data = ''
     mock_json = mock_file.return_value.__enter__.return_value

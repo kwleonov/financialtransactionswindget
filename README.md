@@ -38,6 +38,19 @@ Modules:
   which determines where the logs will be written (to a file or to the console):*
     - *If filename is set, logs are written to the specified file.*
     - *If filename is not specified, the login is output to the console.*
+  - **src/utils**
+    - load_operations_json(filename) - *Loading list of financial transactions. filename - 
+    path to json file. Returns list of dict with financial transaction data.*
+    - get_transaction_amount(transaction) - *gets a transaction as input and returns the transaction amount 
+    in rubles, data type — float. If the transaction was in USD or EUR, an external API is 
+    accessed to obtain the current exchange rate and convert the transaction amount into rubles. 
+    To convert currency, use the convert_currency function in the external_api module.*
+  - **src/external_api**
+    - convert_amount(amount, currency_code, date) - *converting currency from USD or EURO 
+    to RUB with Exchange Rates Data API: https://apilayer.com/exchangerates_data-api. 
+    Need create system environment variables:  
+    API_KEY, API_RESULT, API_URL with {{CURRENCY}}, {{AMOUNT}}, {{DATE}} for replace 
+    currency code, amount and date transaction.*
 - **tests/test_masks**
   - test_get_mask_card_number() - *testing the correctness of masking a card number.*
   - test_get_mask_non_standard_card_number() - *checking the operation of the function on various input formats of
@@ -75,3 +88,11 @@ Modules:
   - test_log() - *the test of logging the execution of the wrapped function, the call of which ended without errors.*
   - test_log_error() - *the test for the log decorator when an error is called as a result of executing 
   the wrapped function.*
+- **tests/test_utils**
+  - test_load_operations_json - *testing loading list of transaction data from json file.*
+  - test_exception_load_operations_json - *testing loading incorrect json file.*
+  - test_empty_load_operations_json - *testing loading empty json file.*
+  - test_not_list_load_operations_json - *testing not list json file.*
+  - test_get_transaction_amount - *testing getting transaction amount.*
+- **tests/test_external_api**
+  - test_convert_amount() - *testing convert currency with external API.*

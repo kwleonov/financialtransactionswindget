@@ -6,7 +6,7 @@ from src.external_api import convert_amount
 
 
 def test_convert_amount():
-    """testing convert amount external API."""
+    """testing convert currency with external API."""
 
     mock_response = Mock()
     mock_response.status_code = 200
