@@ -33,14 +33,19 @@ def get_transaction_amount(transaction_data: dict[str, any]) -> float:
     rubles. To convert currency, use the convert_currency function in
     the external_api module."""
 
-    amount = transaction_data["operationAmount"]["amount"]
-    amount_float = float(amount)
-    currency = transaction_data["operationAmount"]["currency"]["code"]
+    amount_float = 0.0
 
-    if currency != "RUB":
-        date_str = transaction_data["date"]
-        date_time = datetime.datetime.fromisoformat(date_str)
-        date = date_time.strftime("%Y-%m-%d")
-        amount_float = convert_amount(amount, currency, date)
+    try:
+        amount = transaction_data.get("operationAmount").get("amount")
+        amount_float = float(amount)
+        currency = transaction_data["operationAmount"]["currency"]["code"]
+
+        if currency != "RUB":
+            date_str = transaction_data["date"]
+            date_time = datetime.datetime.fromisoformat(date_str)
+            date = date_time.strftime("%Y-%m-%d")
+            amount_float = convert_amount(amount, currency, date)
+    except KeyError as e:
+        print(f"KeyError: {e}")
 
     return amount_float
