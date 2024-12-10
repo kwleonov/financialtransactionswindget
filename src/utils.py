@@ -1,9 +1,21 @@
 # the utils module.
 import datetime
 import json
+import logging
 from json import JSONDecodeError
+from os import makedirs
 
 from src.external_api import convert_amount
+
+log_file = "logs/utils.log"
+log_ok_str = "was executed without errors"
+makedirs("logs", exist_ok=True)
+logger = logging.getLogger(__name__)
+file_formatter = logging.Formatter("%(asctime)s %(filename)s %(levelname)s: %(message)s")
+file_handler = logging.FileHandler(log_file, mode="w")
+file_handler.setFormatter(file_formatter)
+logger.addHandler(file_handler)
+logger.setLevel(logging.DEBUG)
 
 
 def load_operations_json(filename: str) -> list[dict[str, any]]:
@@ -13,15 +25,17 @@ def load_operations_json(filename: str) -> list[dict[str, any]]:
     transaction_data = []
 
     try:
-        with open(filename, "r") as f:
+        with open(filename, "r", encoding="utf-8") as f:
             transaction_data = json.load(f)
             if type(transaction_data) is not list:
+                logger.error("the load_operations_json - didn't get a list of transactions")
                 return []
+            logger.debug(f"the load_operations_json {log_ok_str}")
 
     except JSONDecodeError as e:
-        print(f"JSON decode error: {e}")
+        logger.error(f"the load_operations_json - JSON decode error: {e}")
     except FileNotFoundError as e:
-        print(f"JSON decode error: {e}")
+        logger.error(f"the load_operations_json - JSON file not found: {e}")
 
     return transaction_data
 
@@ -45,7 +59,10 @@ def get_transaction_amount(transaction_data: dict[str, any]) -> float:
             date_time = datetime.datetime.fromisoformat(date_str)
             date = date_time.strftime("%Y-%m-%d")
             amount_float = convert_amount(amount, currency, date)
+
+        logger.debug(f"the get_transaction_amount {log_ok_str}")
+
     except KeyError as e:
-        print(f"KeyError: {e}")
+        logger.error(f"the get_transaction_amount - KeyError: {e}")
 
     return amount_float

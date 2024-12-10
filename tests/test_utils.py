@@ -16,7 +16,7 @@ def test_load_operations_json(mock_file):
     mock_json = mock_file.return_value.__enter__.return_value
     mock_json.read.return_value = json_data
     assert load_operations_json("data/operations.json") == data
-    mock_file.assert_called_once_with("data/operations.json", "r")
+    mock_file.assert_called_once_with("data/operations.json", "r", encoding="utf-8")
 
 
 @patch('builtins.open')
