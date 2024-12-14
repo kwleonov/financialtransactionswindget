@@ -13,23 +13,34 @@ def convert_amount(amount: float, code: str, date: str) -> float:
     API_KEY, API_RESULT, API_URL with {{CURRENCY}}, {{AMOUNT}}, {{DATE}} for replace
     currency code, amount and date transaction."""
 
+    result_amount = 0.0
+
     load_dotenv()
 
     api_key = os.getenv('API_KEY')
+    if api_key is None:
+        return result_amount
 
     headers = {
         'apikey': f'{api_key}'
     }
 
     api_url = os.getenv('API_URL')
-    api_url = api_url.replace('{{CURRENCY}}', code)
-    api_url = api_url.replace('{{AMOUNT}}', str(amount))
-    api_url = api_url.replace('{{DATE}}', date)
+    if api_url is None:
+        return result_amount
 
-    response = requests.get(api_url, headers=headers)
+    api_url_value = str(api_url)
+    api_url_value = api_url_value.replace('{{CURRENCY}}', code)
+    api_url_value = api_url_value.replace('{{AMOUNT}}', str(amount))
+    api_url_value = api_url_value.replace('{{DATE}}', date)
+
+    response = requests.get(api_url_value, headers=headers)
+    result_json = response.json()
 
     api_result_key = os.getenv('API_RESULT')
-    result_json = response.json()
-    result_amount: float = result_json[api_result_key]
+    if api_result_key is None:
+        return result_amount
+
+    result_amount = result_json[api_result_key]
 
     return result_amount
