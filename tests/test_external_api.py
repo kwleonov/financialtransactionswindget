@@ -5,7 +5,7 @@ from unittest.mock import Mock, patch
 from src.external_api import convert_amount
 
 
-def test_convert_amount():
+def test_convert_amount() -> None:
     """testing convert currency with external API."""
 
     mock_response = Mock()
