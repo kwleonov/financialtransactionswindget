@@ -1,14 +1,14 @@
 # the test_utils module
 
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 import pytest
 
-from src.utils import get_transaction_amount, load_operations_json
+from src.utils import TransactionData, get_transaction_amount, load_operations_json
 
 
 @patch('builtins.open')
-def test_load_operations_json(mock_file):
+def test_load_operations_json(mock_file: Mock) -> None:
     """testing loading list of transaction data from json file."""
 
     json_data = '[{"id": 111, "state": "EXECUTED"}]'
@@ -20,7 +20,7 @@ def test_load_operations_json(mock_file):
 
 
 @patch('builtins.open')
-def test_exception_load_operations_json(mock_file):
+def test_exception_load_operations_json(mock_file: Mock) -> None:
     """testing loading incorrect json file."""
 
     json_data = '[{"id": 111, "state": "EXECUTED"]'
@@ -29,14 +29,14 @@ def test_exception_load_operations_json(mock_file):
     assert load_operations_json("data/operations.json") == []
 
 
-def test_load_not_exist_operations_json():
+def test_load_not_exist_operations_json() -> None:
     """testing loading not exist json file."""
 
     assert load_operations_json("data/nonexist.json") == []
 
 
 @patch('builtins.open')
-def test_empty_load_operations_json(mock_file):
+def test_empty_load_operations_json(mock_file: Mock) -> None:
     """testing loading empty json file."""
 
     json_data = ''
@@ -46,7 +46,7 @@ def test_empty_load_operations_json(mock_file):
 
 
 @patch('builtins.open')
-def test_not_list_load_operations_json(mock_file):
+def test_not_list_load_operations_json(mock_file: Mock) -> None:
     """testing not list json file."""
 
     json_data = '{"id": 111, "state": "EXECUTED"}'
@@ -93,7 +93,7 @@ def test_not_list_load_operations_json(mock_file):
             31957.58
     )
 ])
-def test_get_transaction_amount(transaction, amount):
+def test_get_transaction_amount(transaction: TransactionData, amount: float) -> None:
     """testing getting transaction amount."""
 
     with patch('requests.get') as mock_convert:
