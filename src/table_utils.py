@@ -31,6 +31,9 @@ def read_csv(filename: str) -> list[TransactionData]:
         with open(filename, encoding="utf-8") as csv_file:
             csv_data = csv.DictReader(csv_file, delimiter=";")
             for row in csv_data:
+                if not row["id"].isdigit():
+                    logger.warning(f"incorrect csv data in {filename}: 'id' field must be numeric.")
+                    continue
                 id = int(row["id"])
                 state = row["state"]
                 date = row["date"]
@@ -80,6 +83,9 @@ def read_excel(filename: str) -> list[TransactionData]:
             excel_data = pd.read_excel(excel_file)
             excel_dict = excel_data.to_dict("records")
             for row in excel_dict:
+                if row["id"] != row["id"]:
+                    logger.warning(f"incorrect Excel data in {filename}: 'id' field must be numeric.")
+                    continue
                 id = int(row["id"])
                 state = row["state"]
                 date = row["date"]
