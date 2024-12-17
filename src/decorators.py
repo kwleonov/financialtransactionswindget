@@ -1,9 +1,14 @@
 # The decorators module.
 
 from collections.abc import Callable
+from typing import ParamSpec, TypeVar
 
 
-def log[T, **P](filename: str = "") -> Callable[[Callable[P, T]], Callable[P, T | None]]:
+T = TypeVar('T')
+P = ParamSpec('P')
+
+
+def log(filename: str = "") -> Callable[[Callable[P, T]], Callable[P, T | None]]:
     """The log decorator, which will automatically log the beginning and end of the function execution,
     as well as its results or errors that have occurred. The decorator must accept an optional argument filename,
     which determines where the logs will be written (to a file or to the console):
