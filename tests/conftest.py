@@ -1,6 +1,18 @@
+from typing import TypedDict
+
 import pytest
 
-from src.utils import TransactionData
+Currency = TypedDict("Currency", {"name": str, "code": str})
+OperationAmount = TypedDict("OperationAmount", {"amount": str, "currency": Currency})
+TransactionData = TypedDict("TransactionData", {
+    "id": int,
+    "state": str,
+    "date": str,
+    "operationAmount": OperationAmount,
+    "description": str,
+    "from": str,
+    "to": str,
+})
 
 
 @pytest.fixture

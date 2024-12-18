@@ -1,10 +1,23 @@
 # the test_utils module
 
+from typing import TypedDict
 from unittest.mock import Mock, patch
 
 import pytest
 
-from src.utils import TransactionData, get_transaction_amount, load_operations_json
+from src.utils import counter_category, get_transaction_amount, load_operations_json
+
+Currency = TypedDict("Currency", {"name": str, "code": str})
+OperationAmount = TypedDict("OperationAmount", {"amount": str, "currency": Currency})
+TransactionData = TypedDict("TransactionData", {
+    "id": int,
+    "state": str,
+    "date": str,
+    "operationAmount": OperationAmount,
+    "description": str,
+    "from": str,
+    "to": str,
+})
 
 
 @patch('builtins.open')
@@ -99,3 +112,10 @@ def test_get_transaction_amount(transaction: TransactionData, amount: float) -> 
     with patch('requests.get') as mock_convert:
         mock_convert.return_value.json.return_value = {"result": 9999.0}
         assert get_transaction_amount(transaction) == amount
+
+
+def test_counter_category(transactions) -> None:
+    """testing counter_category"""
+    categories = ["Перевод"]
+    data = {"Перевод": 5}
+    assert counter_category(transactions, categories) == data

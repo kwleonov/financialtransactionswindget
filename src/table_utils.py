@@ -3,10 +3,21 @@
 import csv
 import logging
 from os import makedirs
+from typing import TypedDict
 
 import pandas as pd
 
-from src.utils import TransactionData
+Currency = TypedDict("Currency", {"name": str, "code": str})
+OperationAmount = TypedDict("OperationAmount", {"amount": str, "currency": Currency})
+TransactionData = TypedDict("TransactionData", {
+    "id": int,
+    "state": str,
+    "date": str,
+    "operationAmount": OperationAmount,
+    "description": str,
+    "from": str,
+    "to": str,
+})
 
 log_file = "logs/table_utils.log"
 log_ok_str = "was executed without errors"
