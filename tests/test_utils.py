@@ -114,7 +114,7 @@ def test_get_transaction_amount(transaction: TransactionData, amount: float) -> 
         assert get_transaction_amount(transaction) == amount
 
 
-def test_counter_category(transactions) -> None:
+def test_counter_category(transactions: list[TransactionData]) -> None:
     """testing counter_category"""
     categories = ["Перевод"]
     data = {"Перевод": 5}
