@@ -1,5 +1,7 @@
 import pytest
 
+from src.utils import TransactionData
+
 
 @pytest.fixture
 def processes() -> list[dict[str, int | str]]:
@@ -30,10 +32,10 @@ def incorrect_processes() -> list[dict[str, int | str]]:
 
 
 @pytest.fixture
-def transactions():
+def transactions() -> list[TransactionData]:
     """fixture for the test_generators module"""
 
-    transactions_data = [
+    transactions_data: list[TransactionData] = [
         {
             "id": 939719570,
             "state": "EXECUTED",
