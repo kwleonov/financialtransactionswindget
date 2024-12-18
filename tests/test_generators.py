@@ -3,9 +3,10 @@
 import pytest
 
 from src.generators import card_number_generator, filter_by_currency, transaction_descriptions
+from src.utils import TransactionData
 
 
-def test_filter_by_currency(transactions):
+def test_filter_by_currency(transactions: list[TransactionData]) -> None:
     """testing filtering transactions by currency."""
 
     transactions_by_USD = filter_by_currency(transactions, "USD")
@@ -13,7 +14,7 @@ def test_filter_by_currency(transactions):
         assert transaction["operationAmount"]["currency"]["code"] == "USD"
 
 
-def test_filter_by_KGS_currency(transactions):
+def test_filter_by_KGS_currency(transactions: list[TransactionData]) -> None:
     """testing filtering by 'Kazakhstan some' have to return an empty list."""
 
     transactions_by_KGS = filter_by_currency(transactions, "KGS")
@@ -41,14 +42,14 @@ def test_filter_by_KGS_currency(transactions):
      ], "RUB"),
     ([], "")
 ])
-def test_filter_by_empty_currency_transactions(transaction_list, currency_code):
+def test_filter_by_empty_currency_transactions(transaction_list: list[TransactionData], currency_code: str) -> None:
     """testing filtering by an empty transactions list or an empty currency."""
 
     transactions = list(filter_by_currency(transaction_list, currency_code))
     assert len(transactions) == 0
 
 
-def test_transaction_descriptions(transactions):
+def test_transaction_descriptions(transactions: list[TransactionData]) -> None:
     """testing getting transaction's description."""
 
     answers = [
@@ -66,7 +67,7 @@ def test_transaction_descriptions(transactions):
         assert description == answer
 
 
-def test_by_empty_transaction_descriptions():
+def test_by_empty_transaction_descriptions() -> None:
     """esting getting transaction's description with the empty transactions list."""
 
     get_transactions_description = transaction_descriptions([])
@@ -90,7 +91,7 @@ def test_by_empty_transaction_descriptions():
         ),
     ],
 )
-def test_card_number_generator(start_number, stop_number, list_numbers):
+def test_card_number_generator(start_number: int, stop_number: int, list_numbers: list[str]) -> None:
     """testing getting card numbers."""
 
     get_card_number = card_number_generator(start_number, stop_number)
@@ -104,7 +105,7 @@ def test_card_number_generator(start_number, stop_number, list_numbers):
     1234_5678,
     1234_5678_8765_4321,
 ])
-def test_card_number_format(card_number):
+def test_card_number_format(card_number: int) -> None:
     """testing correcting card number format."""
 
     get_card_number = card_number_generator(card_number, card_number)
@@ -124,7 +125,7 @@ def test_card_number_format(card_number):
     (10, 9, ""),
     (1_2345_6789_9999_0000, 1_2345_6789_9999_9999, ""),
 ])
-def test_bad_card_number_range(start_number, stop_number, card_number):
+def test_bad_card_number_range(start_number: int, stop_number: int, card_number: str) -> None:
     """testing for an incorrect range of card numbers."""
 
     card_numbers = list(card_number_generator(start_number, stop_number))

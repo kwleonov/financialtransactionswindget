@@ -51,6 +51,15 @@ Modules:
   Need create system environment variables:  
   API_KEY, API_RESULT, API_URL with {{CURRENCY}}, {{AMOUNT}}, {{DATE}} for replace 
   currency code, amount and date transaction.*
+- **stc/table_utils**
+  - read_csv(filename) - *filename is path to csv file, return list of transaction data from csv file. 
+  csv file must have fields:  
+  id: int, state: str, date: str, amount: float, currency_name: str, currency_code: str, from: str, to: str and 
+  description: str.*
+  - read_excel(filename) - *filename is path to Excel file, return list of transaction data from Excel file. 
+  Excel file must have fields:  
+  id: int, state: str, date: str, amount: float, currency_name: str, currency_code: str, from: str, to: str and 
+  description: str.*
 - **tests/test_masks**
   - test_get_mask_card_number() - *testing the correctness of masking a card number.*
   - test_get_mask_non_standard_card_number() - *checking the operation of the function on various input formats of
@@ -96,3 +105,10 @@ Modules:
   - test_get_transaction_amount - *testing getting transaction amount.*
 - **tests/test_external_api**
   - test_convert_amount() - *testing convert currency with external API.*
+- **tests/test_table_utils**
+  - test_read_csv() - *testing get transaction data from csv file.*
+  - test_not_exist_csv() - *testing open not exist file for exception.*
+  - test_invalid_csv() - *testing get invalid csv data.*
+  - test_read_excel() - *testing get transaction data from excel file.*
+  - test_not_exist_excel() - *testing open not exist file for exception.*
+  - test_invalid_excel() - *testing get invalid excel data.*
