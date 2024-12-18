@@ -1,6 +1,9 @@
 # Financial Transactions Widget
 ## *(Виджет финансовых операций)*
 Modules:
+- **main** - *The main function receives information about transactions from a user-specified file, 
+filters them by the user-specified status, optionally sorts data by date, optionally shows only ruble transactions, 
+optionally filters data by a specific word in the transaction description.*
 - **src/masks**
     - get_mask_card_number(card_number: str) -> str - *gets card number XXXXXXXXXXXXXXXX (12 digits) and
   return mask XXXX XX\*\* \*\*\*\* XXXX, where X is digit.*
@@ -22,6 +25,7 @@ Modules:
   - sort_by_date(processes: list[dict[str, int | str]], is_descending: bool=True) -> list[dict[str, int | str]] -
   *gets a list of dictionaries and an optional parameter specifying the sort order (by default, descending).  
   The function should return a new list sorted by date.*
+  - filter_by_description(processes, word) - *gets a list of transactions filtered by 'description' with 'word'.*
 - **src/generators**
   - filter_by_currency(transactions, currency_code) - *The function get a list of dictionaries representing 
   transactions as input. The function should return an iterator that alternately issues transactions where 
@@ -45,12 +49,14 @@ Modules:
   in rubles, data type — float. If the transaction was in USD or EUR, an external API is 
   accessed to obtain the current exchange rate and convert the transaction amount into rubles. 
   To convert currency, use the convert_currency function in the external_api module.*
+  - counter_category(transactions, categories) - *gets list of transactions and list of categories, 
+  return dict where keys are categories and values are number of operations for each category.*
 - **src/external_api**
   - convert_amount(amount, currency_code, date) - *converting currency from USD or EURO 
   to RUB with Exchange Rates Data API: https://apilayer.com/exchangerates_data-api. 
   Need create system environment variables:  
   API_KEY, API_RESULT, API_URL with {{CURRENCY}}, {{AMOUNT}}, {{DATE}} for replace 
-  currency code, amount and date transaction.*
+  currency code, amount and date transaction. See the details in the env.example.*
 - **stc/table_utils**
   - read_csv(filename) - *filename is path to csv file, return list of transaction data from csv file. 
   csv file must have fields:  
@@ -82,6 +88,7 @@ Modules:
   - test_filter_by_state() - *Testing the filtering of a list of dictionaries by a given state status.*
   - test_sort_by_date() - *Testing the sorting of the dictionary list by date in descending and ascending order.*
   - test_sort_by_incorrect_data - *Testing sort by incorrect date.*
+  - test_filter_by_description - *Testing filtering list of transactions by description with specific word.*
 - **tests/test_generators**
   - test_filter_by_currency() - *testing filtering transactions by currency.*
   - test_filter_by_KGS_currency() - *testing filtering by 'Kazakhstan some' have to return an empty list.*
@@ -103,6 +110,7 @@ Modules:
   - test_empty_load_operations_json - *testing loading empty json file.*
   - test_not_list_load_operations_json - *testing not list json file.*
   - test_get_transaction_amount - *testing getting transaction amount.*
+  - test_counter_category - *testing counter_category.*
 - **tests/test_external_api**
   - test_convert_amount() - *testing convert currency with external API.*
 - **tests/test_table_utils**
