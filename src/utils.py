@@ -3,11 +3,13 @@
 import datetime
 import json
 import logging
+from collections import Counter
 from json import JSONDecodeError
 from os import makedirs
 from typing import TypedDict
 
 from src.external_api import convert_amount
+from src.processing import filter_by_description
 
 Currency = TypedDict("Currency", {"name": str, "code": str})
 OperationAmount = TypedDict("OperationAmount", {"amount": str, "currency": Currency})
@@ -80,3 +82,17 @@ def get_transaction_amount(transaction_data: TransactionData) -> float:
         logger.error(f"the get_transaction_amount - KeyError: {e}")
 
     return amount_float
+
+
+def counter_category(transactions_data: list[TransactionData], categories: list[str]) -> dict[str, int]:
+    """gets list of transactions and list of categories, return dict where keys are categories and values are
+    number of operations for each category."""
+
+    categories_count: Counter[str] = Counter()
+
+    for category in categories:
+        transactions = filter_by_description(transactions_data, category)
+        for i in range(len(transactions)):
+            categories_count.update([category])
+
+    return dict(categories_count)
