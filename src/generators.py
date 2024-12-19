@@ -1,8 +1,19 @@
 # the generators module
 
 from collections.abc import Generator, Iterable
+from typing import TypedDict
 
-from src.utils import TransactionData
+Currency = TypedDict("Currency", {"name": str, "code": str})
+OperationAmount = TypedDict("OperationAmount", {"amount": str, "currency": Currency})
+TransactionData = TypedDict("TransactionData", {
+    "id": int,
+    "state": str,
+    "date": str,
+    "operationAmount": OperationAmount,
+    "description": str,
+    "from": str,
+    "to": str,
+})
 
 
 def filter_by_currency(transactions: list[TransactionData], currency_code: str) -> Iterable[TransactionData]:

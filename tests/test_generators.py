@@ -1,9 +1,22 @@
 # Test for the generators module
 
+from typing import TypedDict
+
 import pytest
 
 from src.generators import card_number_generator, filter_by_currency, transaction_descriptions
-from src.utils import TransactionData
+
+Currency = TypedDict("Currency", {"name": str, "code": str})
+OperationAmount = TypedDict("OperationAmount", {"amount": str, "currency": Currency})
+TransactionData = TypedDict("TransactionData", {
+    "id": int,
+    "state": str,
+    "date": str,
+    "operationAmount": OperationAmount,
+    "description": str,
+    "from": str,
+    "to": str,
+})
 
 
 def test_filter_by_currency(transactions: list[TransactionData]) -> None:
